@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="DoBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	
+	<Target Name="DoBuild">
+		<CallTarget Targets="AddingVersionInfo" />
+		<CallTarget Targets="BuildOutput" />
+		<CallTarget Targets="CreateNuGetPackage"/>
+	</Target>
+
+	<!-- Generate additional version information into the output project assemblies.  This is done by creating CIVersionInfo.generated.cs at build time with extra version information.
+		This target will only run on TeamCity.  Development builds contain a target called "PreBuild" in the csproj files which generate this same file, but with no content.
+	-->
+	<Target Name="AddingVersionInfo" Condition="'$(BUILD_NUMBER)' != ''">
+		<WriteLinesToFile Overwrite="true" File="..\EasyServiceHost.3.5\CIVersionInfo.generated.cs"  Lines='[assembly: System.Reflection.AssemblyInformationalVersion("$(BUILD_NUMBER)")]' />
+		<WriteLinesToFile Overwrite="true" File="..\EasyServiceHost.4.0\CIVersionInfo.generated.cs" Lines='[assembly: System.Reflection.AssemblyInformationalVersion("$(BUILD_NUMBER)")]' />
+	</Target>
+	
+	<Target Name="BuildOutput">
+		<MSBuild Projects="..\EasyServiceHost.3.5\EasyServiceHost.3.5.csproj" Targets="Build" Properties="Configuration=Release" />
+		<MSBuild Projects="..\EasyServiceHost.4.0\EasyServiceHost.4.0.csproj" Targets="Build" Properties="Configuration=Release" />
+	</Target>
+
+	<Target Name="CreateNuGetPackage">
+		<RemoveDir Directories="..\NuGetPackage" ContinueOnError="true"/>
+		<MakeDir Directories="..\NuGetPackage" Condition="!Exists('..\NuGetPackage')" />
+		
+		<GetAssemblyIdentity AssemblyFiles="..\Bin\AnyCPU\NET40\EasyServiceHost.dll">
+			<Output TaskParameter="Assemblies" ItemName="AnyCpuAssembly" />
+		</GetAssemblyIdentity>
+
+		<Exec WorkingDirectory="..\.nuget\" Command="nuget pack ..\EasyServiceHost.nuspec -version %(AnyCpuAssembly.Version) -OutputDirectory &quot;..\NuGetPackage&quot;" />		
+	</Target>
+</Project>

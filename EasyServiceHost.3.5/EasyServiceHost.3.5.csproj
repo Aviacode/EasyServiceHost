@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{45C3F85B-1C3C-4EB1-A0EE-445C3418555D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EasyServiceHost</RootNamespace>
+    <AssemblyName>EasyServiceHost</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DOTNET35</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\EasyServiceHost.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\AnyCPU\NET35\</OutputPath>
+    <DefineConstants>TRACE;DOTNET35</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\Bin\AnyCPU\NET35\EasyServiceHostt.xml</DocumentationFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Src\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Src\IManagedService.cs">
+      <Link>IManagedService.cs</Link>
+    </Compile>
+    <Compile Include="..\Src\IServiceHost.cs">
+      <Link>IServiceHost.cs</Link>
+    </Compile>
+    <Compile Include="..\Src\ManagedHost.cs">
+      <Link>ManagedHost.cs</Link>
+    </Compile>
+    <Compile Include="..\Src\ManagedServiceSettings.cs">
+      <Link>ManagedServiceSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Src\ServiceProcessWithParametersInstaller.cs">
+      <Link>ServiceProcessWithParametersInstaller.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\Src\SingleDomainManager.cs">
+      <Link>SingleDomainManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Src\SingleServiceHostService.cs">
+      <Link>SingleServiceHostService.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\Src\WindowsServiceSettings.cs">
+      <Link>WindowsServiceSettings.cs</Link>
+    </Compile>
+    <Compile Include="BuildSpecificAssemblyInfo.cs" />
+    <Compile Include="CIVersionInfo.generated.cs">
+      <Visible>False</Visible>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+  <!-- Generate additional version information into a generated version file.  This is needed to build but we dont need to write any information to the file for development builds.-->
+  <Target Name="BeforeBuild">
+    <WriteLinesToFile File="CIVersionInfo.generated.cs" Condition="!Exists('CIVersionInfo.generated.cs')" />
+  </Target>
+</Project>

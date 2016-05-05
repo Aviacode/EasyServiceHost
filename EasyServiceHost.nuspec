@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>EasyServiceHost</id>
+		<version>$version$</version>
+		<title />
+		<authors>Aviacode</authors>
+		<owners />
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Executable for hosting managed services</description>
+		<releaseNotes>
+			$version$ - Added support for multi-instance deployments of services by accepting commandline arguments during install-time and run-time.
+		</releaseNotes>
+		<summary />
+	</metadata>
+	<files>
+		<file src="Bin\AnyCPU\**" target="lib" />
+	</files>
+</package>
