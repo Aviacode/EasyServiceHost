@@ -6,12 +6,14 @@
 		<title />
 		<authors>Aviacode</authors>
 		<owners />
+		<projectUrl>https://github.com/Aviacode/EasyServiceHost</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Executable for hosting managed services</description>
 		<releaseNotes>
 			$version$ - Added support for multi-instance deployments of services by accepting commandline arguments during install-time and run-time.
 		</releaseNotes>
 		<summary />
+		<tags>windows winservice ServiceBase install host console</tags>
 	</metadata>
 	<files>
 		<file src="Bin\AnyCPU\**" target="lib" />
