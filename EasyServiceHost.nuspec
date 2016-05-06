@@ -3,16 +3,17 @@
 	<metadata>
 		<id>EasyServiceHost</id>
 		<version>$version$</version>
-		<title />
+		<title>Easy Service Host</title>
 		<authors>Aviacode</authors>
 		<owners />
 		<projectUrl>https://github.com/Aviacode/EasyServiceHost</projectUrl>
+		<copyright>Aviacode Inc.</copyright>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Executable for hosting managed services</description>
 		<releaseNotes>
-			$version$ - Added support for multi-instance deployments of services by accepting commandline arguments during install-time and run-time.
+			1.0.0.0 - Initial release.
 		</releaseNotes>
-		<summary />
+		<summary>A library that makes it easy to develop, debug, deploy and run your .NET executable as a windows service.</summary>
 		<tags>windows winservice ServiceBase install host console</tags>
 	</metadata>
 	<files>
